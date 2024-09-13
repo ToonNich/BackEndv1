@@ -8,13 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
-import se331.lab.rest.entity.Event;
 import se331.lab.rest.entity.Organizer;
 
-import  jakarta.annotation.PostConstruct;
-import se331.lab.service.OrganizerService;
+import se331.lab.rest.service.OrganizerService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller

@@ -1,8 +1,8 @@
-package se331.lab.service;
+package se331.lab.rest.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import se331.lab.dao.EventDao;
+import se331.lab.rest.dao.EventDao;
 import se331.lab.rest.entity.Event;
 
 import java.util.List;

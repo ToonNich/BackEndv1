@@ -1,4 +1,4 @@
-package se331.lab.dao;
+package se331.lab.rest.dao;
 
 import se331.lab.rest.entity.Organizer;
 

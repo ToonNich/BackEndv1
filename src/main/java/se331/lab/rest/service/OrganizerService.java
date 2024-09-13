@@ -1,4 +1,4 @@
-package se331.lab.service;
+package se331.lab.rest.service;
 
 import se331.lab.rest.entity.Event;
 import se331.lab.rest.entity.Organizer;

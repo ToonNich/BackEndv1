@@ -1,8 +1,7 @@
-package se331.lab.dao;
+package se331.lab.rest.dao;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
-import se331.lab.rest.entity.Event;
 import se331.lab.rest.entity.Organizer;
 
 import java.util.ArrayList;
