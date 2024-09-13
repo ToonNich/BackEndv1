@@ -21,9 +21,13 @@ public class EventServicelmpl implements EventService{
     public Page<Event> getEvents(Integer pageSize, Integer page){
         return eventDao.getEvents(pageSize, page);
     }
-
     @Override
     public Event getEvent(Long id){
         return eventDao.getEvent(id);
+    }
+
+    @Override
+    public Event save(Event event) {
+        return eventDao.save(event);
     }
 }
