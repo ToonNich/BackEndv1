@@ -2,6 +2,7 @@ package se331.lab.rest.dao;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import se331.lab.rest.entity.Event;
 import se331.lab.rest.repository.EventRepository;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+@Profile("manual")
 public class EventDaolmpl implements EventDao{
     List<Event> eventList;
 
@@ -89,31 +91,17 @@ public class EventDaolmpl implements EventDao{
                 .build());
     }
 
-    final EventRepository eventRepository;
     @Override
-    public Integer getEventSize() {
-        return Math.toIntExact(eventRepository.count());
+    public Integer getEventSize(){
+        return eventList.size();
     }
-//    @Override
-//    public Integer getEventSize(){
-//        return eventList.size();
-//    }
 
-//    @Override
-//    public List<Event> getEvents(Integer pageSize, Integer page){
-//        pageSize = pageSize == null ? eventList.size() : pageSize;
-//        page = page == null ? 1 : page;
-//        int firstIndex = (page - 1) * pageSize;
-//        return eventList.subList(firstIndex, firstIndex+pageSize);
-//    }
     @Override
     public List<Event> getEvents(Integer pageSize, Integer page){
-        List<Event> events = eventRepository.findAllBy();
         pageSize = pageSize == null ? eventList.size() : pageSize;
         page = page == null ? 1 : page;
         int firstIndex = (page - 1) * pageSize;
-        List<Event> output = events.subList(firstIndex, firstIndex + pageSize);
-        return output;
+        return eventList.subList(firstIndex, firstIndex+pageSize);
     }
 
     @Override
