@@ -22,7 +22,7 @@ public class Event {
     String location;
     String date;
     String time;
-    Boolean petAllowed;
+    Boolean petsAllowed;
     String organizer;
 }
 

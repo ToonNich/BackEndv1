@@ -3,6 +3,9 @@ package se331.lab.rest.dao;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import se331.lab.rest.entity.Event;
 import se331.lab.rest.repository.EventRepository;
@@ -20,74 +23,44 @@ public class EventDaolmpl implements EventDao{
     public void init() {
         eventList = new ArrayList<>();
         eventList.add(Event.builder()
-                .id(123L)
-                .category("animal welfare")
-                .title("Cat Adoption Day")
-                .description("Fine your new feline friend at this event.")
-                .location("Meow Town")
-                .date("January 28, 2022")
-                .time("12.00")
-                .petAllowed(true)
-                .organizer("Kat Laydee")
+                .category("Academic")
+                .title("Midterm Exam")
+                .description("A time for taking the exam")
+                .location("CAMT Building")
+                .date("3rd Sept")
+                .time("3.00-4.00 pm.")
+                .petsAllowed(false)
+                .organizer("CAMT")
                 .build());
         eventList.add(Event.builder()
-                .id(456L)
-                .category("food")
-                .title("Community Gardening")
-                .description("Join us as we twnd to the community edible plants.")
-                .location("Flora City")
-                .date("March 14, 2022")
-                .time("10.00")
-                .petAllowed(true)
-                .organizer("Fern Pollin")
+                .category("Academic")
+                .title("Commencement Day")
+                .description("A time for celebration")
+                .location("CMU Convention hall")
+                .date("21th Jan")
+                .time("8.00 am-1.00 pm.")
+                .petsAllowed(false)
+                .organizer("CMU")
                 .build());
-
         eventList.add(Event.builder()
-                .id(789L)
-                .category("sustainability")
-                .title("Beach Cleanup")
-                .description("Help pick up trash along the shore.")
-                .location("Playa Del Carmen")
-                .date("July 22, 2022")
-                .time("11:00")
-                .petAllowed(false)
-                .organizer("Carey Wales")
+                .category("Cultural")
+                .title("Loy Krathong")
+                .description("A time for Krathong")
+                .location("Ping River")
+                .date("21th Nov")
+                .time("8.00 - 10.00 pm.")
+                .petsAllowed(false)
+                .organizer("Chaing Mai")
                 .build());
-
         eventList.add(Event.builder()
-                .id(1001L)
-                .category("animal welfare")
-                .title("Dog Adoption Day")
-                .description("Find your new canine friend at this event.")
-                .location("Woof Town")
-                .date("August 28, 2022")
-                .time("12:00")
-                .petAllowed(true)
-                .organizer("Dawg Dahd")
-                .build());
-
-        eventList.add(Event.builder()
-                .id(1002L)
-                .category("food")
-                .title("Canned Food Drive")
-                .description("Bring your canned food to donate to those in need.")
-                .location("Tin City")
-                .date("September 14, 2022")
-                .time("3:00")
-                .petAllowed(true)
-                .organizer("Kahn Opiner")
-                .build());
-
-        eventList.add(Event.builder()
-                .id(1003L)
-                .category("sustainability")
-                .title("Highway Cleanup")
-                .description("Help pick up trash along the highway.")
-                .location("Highway 50")
-                .date("July 22, 2022")
-                .time("11:00")
-                .petAllowed(false)
-                .organizer("Brody Kill")
+                .category("Cultural")
+                .title("Songkran")
+                .description("Let's play Water")
+                .location("Chiang Mai Moat")
+                .date("13th Aprill")
+                .time("10.00 am - 6.00 pm.")
+                .petsAllowed(false)
+                .organizer("Chiang MAi Municipality")
                 .build());
     }
 
@@ -97,11 +70,11 @@ public class EventDaolmpl implements EventDao{
     }
 
     @Override
-    public List<Event> getEvents(Integer pageSize, Integer page){
+    public Page<Event> getEvents(Integer pageSize, Integer page){
         pageSize = pageSize == null ? eventList.size() : pageSize;
         page = page == null ? 1 : page;
         int firstIndex = (page - 1) * pageSize;
-        return eventList.subList(firstIndex, firstIndex+pageSize);
+        return new PageImpl<Event>(eventList.subList(firstIndex, firstIndex+pageSize), PageRequest.of(page, pageSize), eventList.size());
     }
 
     @Override
