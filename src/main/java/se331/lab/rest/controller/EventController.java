@@ -16,15 +16,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventController {
     final EventService eventService;
+
     @GetMapping("events")
     public ResponseEntity<?> getEventLists(
             @RequestParam(value = "_limit", required = false) Integer perPage,
-            @RequestParam(value = "_page", required = false) Integer page)
-    {
-        Page<Event> pageOutput = eventService.getEvents(perPage, page);
+            @RequestParam(value = "_page", required = false) Integer page) {
+// Default values if parameters are null
+        int pageSize = (perPage != null) ? perPage : 10; // Default to 10 if perPage is null
+        int pageNumber = (page != null) ? page : 1; // Default to 1 if page is null
+        Page<Event> pageOutput = eventService.getEvents(pageSize, pageNumber);
         HttpHeaders responseHeader = new HttpHeaders();
-        responseHeader.set("X-total-count", String.valueOf(pageOutput.getTotalElements()));
-        return new ResponseEntity<>(pageOutput.getContent() , responseHeader,HttpStatus.OK);
+        responseHeader.set("x-total-count", String.valueOf(pageOutput.getTotalElements()));
+        return new ResponseEntity<>(pageOutput.getContent(), responseHeader, HttpStatus.OK);
     }
     @GetMapping("events/{id}")
     public ResponseEntity<?> getEvent(@PathVariable("id") Long id) {

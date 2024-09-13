@@ -20,15 +20,12 @@ public class EventDaoDbImpl implements EventDao{
     public Integer getEventSize() {
         return Math.toIntExact(eventRepository.count());
     }
+
     @Override
     public Page<Event> getEvents(Integer pageSize, Integer page) {
-//        List<Event> events = eventRepository.findAll();
-//        pageSize = pageSize == null ? events.size() : pageSize ;
-//        page = page ==null ? 1 : page;
-//        int firstIndex = (page - 1) * pageSize;
-//        List<Event> output = events.subList(firstIndex, firstIndex + pageSize);
-//        return output;
-        return eventRepository.findAll(PageRequest.of(page - 1 , pageSize));
+        int pageNumber = (page != null) ? page - 1 : 0;  // Default to page 0 if null
+        int size = (pageSize != null) ? pageSize : 10;   // Default to pageSize 10 if null
+        return eventRepository.findAll(PageRequest.of(pageNumber, size));
     }
 
     @Override
