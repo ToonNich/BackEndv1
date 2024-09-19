@@ -21,7 +21,7 @@ public class EventController {
     public ResponseEntity<?> getEventLists(
             @RequestParam(value = "_limit", required = false) Integer perPage,
             @RequestParam(value = "_page", required = false) Integer page) {
-// Default values if parameters are null
+ // Default values if parameters are null
         int pageSize = (perPage != null) ? perPage : 10; // Default to 10 if perPage is null
         int pageNumber = (page != null) ? page : 1; // Default to 1 if page is null
         Page<Event> pageOutput = eventService.getEvents(pageSize, pageNumber);
