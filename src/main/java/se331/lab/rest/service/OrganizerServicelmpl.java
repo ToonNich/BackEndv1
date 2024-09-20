@@ -19,6 +19,7 @@ public class OrganizerServicelmpl implements OrganizerService{
 
     @Override
     public Page<Organizer> getOrganizers(Integer pageSize, Integer page){
+
         return organizerDao.getOrganizers(pageSize, page);
     }
 
